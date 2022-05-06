@@ -11,7 +11,9 @@ bx = 350
 by = 250
 bVx = 5
 bVy = 5
-
+P2score= 0
+P1score= 0
+ 
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pong")
@@ -114,6 +116,11 @@ while carryOn:
         bVx *= -1
     if by < p2x + 20 and bx + 20 > p2x and by < p2y + 100:
         bVx *= -1
+    if bx < 0:
+        P2score += 1
+    if bx> 685:
+        P1score += 1
+        
  
     # --- Drawing code should go here
    
@@ -124,6 +131,11 @@ while carryOn:
     pygame.draw.rect(screen, (255, 255, 255), (p1x, p1y, 20, 100), 1)
     pygame.draw.rect(screen, (255, 255, 255), (p2x, p2y, 20, 100), 1)
     pygame.draw.rect(screen, (255, 255, 255), (bx, by, 20, 20), 1)
+    font = pygame.font.Font(None,74)
+    text = font.render(str(P2score), 1,(255, 255, 255))
+    screen.blit(text,(250, 10))
+    text = font.render(str(P1score), 1,(255, 255, 255))
+    screen.blit(text,(420, 10))
  
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
